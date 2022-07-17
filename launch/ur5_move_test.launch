@@ -1,0 +1,19 @@
+<launch>
+  
+  <!-- robot_ip: IP-address of the robot's socket-messaging server -->
+  <arg name="robot_ip" default="10.32.134.142" doc="IP of the controller"/>
+  <arg name="kinematics_config" default="$(find ur_description)/config/ur5e_calibration.yaml"/>
+  
+  <include file="$(find ur_robot_driver)/launch/ur5e_bringup.launch">
+    <arg name="robot_ip" value="$(arg robot_ip)"/>
+    <arg name="kinematics_config" value="$(arg kinematics_config)"/>
+  </include>
+
+  <include file="$(find ur5e_moveit_config)/launch/ur5e_moveit_planning_execution.launch">
+  </include>
+
+  <include file="$(find ur5_moveit_config)/launch/moveit_rviz.launch">
+    <arg name="rviz_config" value="$(find ur5_moveit_config)/launch/moveit.rviz"/>
+  </include>
+  
+</launch>
